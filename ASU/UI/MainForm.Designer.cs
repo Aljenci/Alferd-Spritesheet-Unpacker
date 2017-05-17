@@ -37,6 +37,7 @@ namespace ASU.UI
             this.ExportSelectedButton = new System.Windows.Forms.Button();
             this.ExportLocationTextBox = new System.Windows.Forms.TextBox();
             this.OptionsButton = new System.Windows.Forms.Button();
+            this.GroupButton = new System.Windows.Forms.Button();
             this.CombineButton = new System.Windows.Forms.Button();
             this.FolderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.CheckForUnpackFinishTimer = new System.Windows.Forms.Timer(this.components);
@@ -64,11 +65,12 @@ namespace ASU.UI
             this.OptionsPanel.Controls.Add(this.ExportSelectedButton);
             this.OptionsPanel.Controls.Add(this.ExportLocationTextBox);
             this.OptionsPanel.Controls.Add(this.OptionsButton);
+            this.OptionsPanel.Controls.Add(this.GroupButton);
             this.OptionsPanel.Controls.Add(this.CombineButton);
             this.OptionsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.OptionsPanel.Location = new System.Drawing.Point(0, 238);
             this.OptionsPanel.Name = "OptionsPanel";
-            this.OptionsPanel.Size = new System.Drawing.Size(604, 89);
+            this.OptionsPanel.Size = new System.Drawing.Size(664, 89);
             this.OptionsPanel.TabIndex = 0;
             // 
             // SelectAllButton
@@ -76,7 +78,7 @@ namespace ASU.UI
             this.SelectAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectAllButton.Image = global::ASU.Properties.Resources.select_all;
             this.SelectAllButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.SelectAllButton.Location = new System.Drawing.Point(444, 6);
+            this.SelectAllButton.Location = new System.Drawing.Point(504, 6);
             this.SelectAllButton.Name = "SelectAllButton";
             this.SelectAllButton.Size = new System.Drawing.Size(78, 35);
             this.SelectAllButton.TabIndex = 9;
@@ -91,7 +93,7 @@ namespace ASU.UI
             this.DeSelectAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DeSelectAllButton.Image = global::ASU.Properties.Resources.deselect_all;
             this.DeSelectAllButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.DeSelectAllButton.Location = new System.Drawing.Point(523, 6);
+            this.DeSelectAllButton.Location = new System.Drawing.Point(583, 6);
             this.DeSelectAllButton.Name = "DeSelectAllButton";
             this.DeSelectAllButton.Size = new System.Drawing.Size(78, 35);
             this.DeSelectAllButton.TabIndex = 3;
@@ -160,7 +162,7 @@ namespace ASU.UI
             this.ExportSelectedButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ExportSelectedButton.Image = global::ASU.Properties.Resources.images;
             this.ExportSelectedButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ExportSelectedButton.Location = new System.Drawing.Point(444, 47);
+            this.ExportSelectedButton.Location = new System.Drawing.Point(504, 47);
             this.ExportSelectedButton.Name = "ExportSelectedButton";
             this.ExportSelectedButton.Size = new System.Drawing.Size(157, 39);
             this.ExportSelectedButton.TabIndex = 7;
@@ -175,7 +177,7 @@ namespace ASU.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ExportLocationTextBox.Location = new System.Drawing.Point(97, 58);
             this.ExportLocationTextBox.Name = "ExportLocationTextBox";
-            this.ExportLocationTextBox.Size = new System.Drawing.Size(341, 21);
+            this.ExportLocationTextBox.Size = new System.Drawing.Size(401, 21);
             this.ExportLocationTextBox.TabIndex = 6;
             // 
             // OptionsButton
@@ -191,6 +193,20 @@ namespace ASU.UI
             this.OptionsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.OptionsButton.UseVisualStyleBackColor = true;
             this.OptionsButton.Click += new System.EventHandler(this.OptionsButton_Click);
+            // 
+            // GroupButton
+            // 
+            this.GroupButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.GroupButton.Image = global::ASU.Properties.Resources.select_all;
+            this.GroupButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.GroupButton.Location = new System.Drawing.Point(425, 6);
+            this.GroupButton.Name = "GroupButton";
+            this.GroupButton.Size = new System.Drawing.Size(78, 35);
+            this.GroupButton.TabIndex = 0;
+            this.GroupButton.Text = "Group Selected";
+            this.GroupButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.GroupButton.UseVisualStyleBackColor = true;
+            this.GroupButton.Click += new System.EventHandler(this.GroupButton_Click);
             // 
             // CombineButton
             // 
@@ -235,7 +251,7 @@ namespace ASU.UI
             this.MainPanel.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(604, 238);
+            this.MainPanel.Size = new System.Drawing.Size(664, 238);
             this.MainPanel.TabIndex = 4;
             this.MainPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainPanel_DragDrop);
             this.MainPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainPanel_DragEnter);
@@ -263,7 +279,7 @@ namespace ASU.UI
             this.HyperModeUnpacking0Label.BackColor = System.Drawing.Color.Transparent;
             this.HyperModeUnpacking0Label.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HyperModeUnpacking0Label.ForeColor = System.Drawing.Color.Gray;
-            this.HyperModeUnpacking0Label.Location = new System.Drawing.Point(346, 77);
+            this.HyperModeUnpacking0Label.Location = new System.Drawing.Point(406, 77);
             this.HyperModeUnpacking0Label.Name = "HyperModeUnpacking0Label";
             this.HyperModeUnpacking0Label.Size = new System.Drawing.Size(61, 40);
             this.HyperModeUnpacking0Label.TabIndex = 5;
@@ -278,7 +294,7 @@ namespace ASU.UI
             this.HyperModeUnpacking1Label.BackColor = System.Drawing.Color.Transparent;
             this.HyperModeUnpacking1Label.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HyperModeUnpacking1Label.ForeColor = System.Drawing.Color.Gray;
-            this.HyperModeUnpacking1Label.Location = new System.Drawing.Point(466, 77);
+            this.HyperModeUnpacking1Label.Location = new System.Drawing.Point(526, 77);
             this.HyperModeUnpacking1Label.Name = "HyperModeUnpacking1Label";
             this.HyperModeUnpacking1Label.Size = new System.Drawing.Size(57, 40);
             this.HyperModeUnpacking1Label.TabIndex = 4;
@@ -292,7 +308,7 @@ namespace ASU.UI
             this.HyperModeUnpackingLabel.BackColor = System.Drawing.Color.Transparent;
             this.HyperModeUnpackingLabel.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HyperModeUnpackingLabel.ForeColor = System.Drawing.Color.Gray;
-            this.HyperModeUnpackingLabel.Location = new System.Drawing.Point(399, 77);
+            this.HyperModeUnpackingLabel.Location = new System.Drawing.Point(459, 77);
             this.HyperModeUnpackingLabel.Name = "HyperModeUnpackingLabel";
             this.HyperModeUnpackingLabel.Size = new System.Drawing.Size(76, 40);
             this.HyperModeUnpackingLabel.TabIndex = 3;
@@ -315,7 +331,7 @@ namespace ASU.UI
             // 
             this.DragAndDropLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.DragAndDropLabel.AutoSize = true;
-            this.DragAndDropLabel.Location = new System.Drawing.Point(216, 77);
+            this.DragAndDropLabel.Location = new System.Drawing.Point(276, 77);
             this.DragAndDropLabel.Name = "DragAndDropLabel";
             this.DragAndDropLabel.Size = new System.Drawing.Size(385, 40);
             this.DragAndDropLabel.TabIndex = 1;
@@ -336,12 +352,12 @@ namespace ASU.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 327);
+            this.ClientSize = new System.Drawing.Size(680, 327);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.OptionsPanel);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(620, 365);
+            this.MinimumSize = new System.Drawing.Size(680, 365);
             this.Name = "MainForm";
             this.Text = "Alferd Spritesheet Unpacker";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
@@ -362,6 +378,7 @@ namespace ASU.UI
         internal ASU.UI.BuffablePanel ZoomPanel;
         internal System.Windows.Forms.TextBox ExportLocationTextBox;
         internal System.Windows.Forms.Button OptionsButton;
+        internal System.Windows.Forms.Button GroupButton;
         internal System.Windows.Forms.Button ReloadButton;
         internal System.Windows.Forms.Button DeSelectAllButton;
         internal System.Windows.Forms.Button PasteButton;

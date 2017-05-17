@@ -34,6 +34,13 @@ namespace ASU.UI
             get { return this._Boxes; }
             set { this._Boxes = value; }
         }
+        private Dictionary<Rectangle, string> _BoxesGroups = new Dictionary<Rectangle, string>();
+        private Dictionary<Rectangle, string> BoxesGroups
+        {
+            get { return this._BoxesGroups; }
+            set { this._BoxesGroups = value; }
+        }
+        private List<string> GroupsValue = new List<string>();
         private List<Rectangle> Selected = new List<Rectangle>();
         private List<Rectangle> Splits = new List<Rectangle>();
         private Rectangle SplitTopLeft;
@@ -41,6 +48,7 @@ namespace ASU.UI
         private Rectangle BoxSplitting;
         private Rectangle Hover = Rectangle.Empty;
         private OptionsForm Options;
+        private GroupForm Groups;
         private Rectangle HighlightRect = Rectangle.Empty;
 
         private bool SuppressThirdPartyWarningMessage = false;
@@ -1133,13 +1141,31 @@ namespace ASU.UI
 
                                     if (string.IsNullOrEmpty(ExportNConvertArgs))
                                     {
-                                        bitmap.Save(String.Format("{0}\\{1}.{2}", outpath, k.ToString(), ExportFormat.ToString().ToLower()), ExportFormat);
+                                        if (BoxesGroups.ContainsKey(boxes[k]))
+                                        {
+                                            // If the output folder does not exist, create it.
+                                            string actualPath = String.Format("{0}\\{1}", outpath, BoxesGroups[boxes[k]]);
+                                            if (!System.IO.Directory.Exists(actualPath))
+                                                System.IO.Directory.CreateDirectory(actualPath);
+                                            bitmap.Save(String.Format("{0}\\{1}.{2}", actualPath, k.ToString(), ExportFormat.ToString().ToLower()), ExportFormat);
+                                        }
+                                        else
+                                            bitmap.Save(String.Format("{0}\\{1}.{2}", outpath, k.ToString(), ExportFormat.ToString().ToLower()), ExportFormat);
                                     }
                                     else
                                     {
                                         string tempBitmapPath = null;
                                         System.Diagnostics.ProcessStartInfo startInfo = null;
-                                        tempBitmapPath = String.Format("{0}\\{1}.png", outpath, k.ToString());
+                                        if (BoxesGroups.ContainsKey(boxes[k]))
+                                        {
+                                            // If the output folder does not exist, create it.
+                                            string actualPath = String.Format("{0}\\{1}", outpath, BoxesGroups[boxes[k]]);
+                                            if (!System.IO.Directory.Exists(actualPath))
+                                                System.IO.Directory.CreateDirectory(actualPath);
+                                            tempBitmapPath = String.Format("{0}\\{1}.png", actualPath, k.ToString());
+                                        }
+                                        else
+                                            tempBitmapPath = String.Format("{0}\\{1}.png", outpath, k.ToString());
                                         tempFiles.Add(tempBitmapPath);
                                         bitmap.Save(tempBitmapPath, System.Drawing.Imaging.ImageFormat.Png);
                                         args = ExportNConvertArgs.Replace("{file_name}", String.Format("\"{0}\\{1}.png\"", outpath, k.ToString()));
@@ -1362,6 +1388,58 @@ namespace ASU.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error loading options");
+            }
+        }
+
+        private void GroupButton_Click(System.Object sender, System.EventArgs e)
+        {
+            try
+            {
+                if (this.unpackers.Count != 1)
+                {
+                    MessageBox.Show("No spritesheet loaded. Please drop a spritesheet onto this form and select some frames before trying to group frames.");
+                    return;
+                }
+                else
+                {
+                    if (this.Selected.Count == 0)
+                    {
+                        MessageBox.Show("No frames selected. Please select some frames before trying to group.");
+                        return;
+                    }
+                }
+
+                try
+                {
+                    if (this.Groups == null || this.Groups.IsDisposed)
+                    {
+                        this.Groups = new GroupForm();
+                        this.Groups.Main = this;
+                    }
+                    this.Groups.ComboValues = GroupsValue;
+
+                    this.Groups.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error loading groups");
+                }
+
+                string group_name = "Test";
+                if (!GroupsValue.Contains(group_name))
+                    GroupsValue.Add(group_name);
+
+                foreach (Rectangle box in this.Selected)
+                {
+                    if (BoxesGroups.ContainsKey(box))
+                        BoxesGroups[box] = group_name;
+                    else
+                        BoxesGroups.Add(box, group_name);
+                }
+            }
+            catch (Exception ex)
+            {
+                ForkandBeard.Logic.ExceptionHandler.HandleException(ex, "cat@forkandbeard.co.uk");
             }
         }
 
