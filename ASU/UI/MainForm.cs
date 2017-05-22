@@ -850,6 +850,37 @@ namespace ASU.UI
                         graphics.DrawRectangle(Outline, highlightFixed);
                     }
 
+                    Dictionary<string, Rectangle> GroupsToPaint = new Dictionary<string, Rectangle>();
+                    foreach (KeyValuePair<Rectangle, string> box in BoxesGroups)
+                    {
+                        if (GroupsToPaint.ContainsKey(box.Value))
+                            GroupsToPaint[box.Value] = Rectangle.Union(GroupsToPaint[box.Value], box.Key);
+                        else
+                            GroupsToPaint.Add(box.Value, box.Key);
+                    }
+                    
+                    foreach (KeyValuePair<string, Rectangle> group in GroupsToPaint)
+                    {
+                        boxOffset = group.Value;
+                        boxOffset.Offset(this.Offset);
+                        graphics.DrawRectangle(Outline, boxOffset);
+
+                        if (Outline.Color.GetBrightness() >= 0.5)
+                        {
+                            using (SolidBrush overlayBrushShadow = new SolidBrush(Color.FromArgb(Convert.ToInt32(Outline.Color.G / 2), Convert.ToInt32(Outline.Color.B / 2), Convert.ToInt32(Outline.Color.R / 2))))
+                            {
+                                graphics.DrawString(group.Key, this.OverlayFontLabel.Font, overlayBrushShadow, boxOffset.Location);
+                            }
+                        }
+                        else
+                        {
+                            using (SolidBrush overlayBrushShadow = new SolidBrush(Color.FromArgb(Math.Min(255, Convert.ToInt32(Outline.Color.G * 1.5)), Math.Min(255, Convert.ToInt32(Outline.Color.B * 1.5)), Math.Min(255, Convert.ToInt32(Outline.Color.R * 1.5)))))
+                            {
+                                graphics.DrawString(group.Key, this.OverlayFontLabel.Font, overlayBrushShadow, boxOffset.Location);
+                            }
+                        }
+                    }
+
                     if (!this.IsMouseDown)
                     {
                         this.ZoomImage = new Bitmap(20, 20);
@@ -1425,16 +1456,19 @@ namespace ASU.UI
                     MessageBox.Show(ex.Message, "Error loading groups");
                 }
 
-                string group_name = "Test";
-                if (!GroupsValue.Contains(group_name))
-                    GroupsValue.Add(group_name);
-
-                foreach (Rectangle box in this.Selected)
+                if ( this.Groups.Correct )
                 {
-                    if (BoxesGroups.ContainsKey(box))
-                        BoxesGroups[box] = group_name;
-                    else
-                        BoxesGroups.Add(box, group_name);
+                    string group_name = this.Groups.GroupName;
+                    if (!GroupsValue.Contains(group_name))
+                        GroupsValue.Add(group_name);
+
+                    foreach (Rectangle box in this.Selected)
+                    {
+                        if (BoxesGroups.ContainsKey(box))
+                            BoxesGroups[box] = group_name;
+                        else
+                            BoxesGroups.Add(box, group_name);
+                    }
                 }
             }
             catch (Exception ex)

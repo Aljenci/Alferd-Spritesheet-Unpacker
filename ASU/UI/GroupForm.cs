@@ -19,10 +19,37 @@ namespace ASU.UI
             set { this._ComboValues = value; }
         }
 
+        public string GroupName { get; set; }
+
+        public bool Correct { get; set; }
+
         private void GroupForm_Load(object sender, System.EventArgs e)
         {
+            Correct = false;
             foreach (string value in ComboValues)
-                this.GroupsCombo.Items.Add(value);
+            {
+                if (!this.GroupsCombo.Items.Contains(value))
+                    this.GroupsCombo.Items.Add(value);
+            }
+            this.GroupsCombo.SelectedIndex = this.GroupsCombo.FindString(this.GroupName);
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            Correct = false;
+            this.Hide();
+        }
+
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            Correct = true;
+            GroupName = this.GroupText.Text;
+            this.Hide();
+        }
+
+        private void GroupsCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.GroupText.Text = this.GroupsCombo.Text;
         }
     }
 }

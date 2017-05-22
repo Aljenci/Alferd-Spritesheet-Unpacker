@@ -35,7 +35,6 @@ namespace ASU.UI
         [System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GroupForm));
             this.MainLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.GroupsCombo = new System.Windows.Forms.ComboBox();
             this.GroupText = new System.Windows.Forms.TextBox();
@@ -44,7 +43,7 @@ namespace ASU.UI
             this.MainLayout.SuspendLayout();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // MainLayout
             // 
             this.MainLayout.Controls.Add(this.GroupsCombo);
             this.MainLayout.Controls.Add(this.GroupText);
@@ -53,18 +52,19 @@ namespace ASU.UI
             this.MainLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainLayout.Location = new System.Drawing.Point(0, 0);
             this.MainLayout.Name = "MainLayout";
-            this.MainLayout.Size = new System.Drawing.Size(164, 85);
+            this.MainLayout.Size = new System.Drawing.Size(163, 85);
             this.MainLayout.TabIndex = 0;
             // 
-            // comboBox1
+            // GroupsCombo
             // 
             this.GroupsCombo.FormattingEnabled = true;
             this.GroupsCombo.Location = new System.Drawing.Point(3, 3);
             this.GroupsCombo.Name = "GroupsCombo";
             this.GroupsCombo.Size = new System.Drawing.Size(156, 21);
             this.GroupsCombo.TabIndex = 0;
+            this.GroupsCombo.SelectedIndexChanged += new System.EventHandler(this.GroupsCombo_SelectedIndexChanged);
             // 
-            // textBox1
+            // GroupText
             // 
             this.GroupText.Location = new System.Drawing.Point(3, 30);
             this.GroupText.Name = "GroupText";
@@ -79,6 +79,7 @@ namespace ASU.UI
             this.OkButton.TabIndex = 2;
             this.OkButton.Text = "Ok";
             this.OkButton.UseVisualStyleBackColor = true;
+            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // CancelButton
             // 
@@ -88,12 +89,12 @@ namespace ASU.UI
             this.CancelButton.TabIndex = 3;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // GroupForm
             // 
             this.ClientSize = new System.Drawing.Size(163, 85);
             this.Controls.Add(this.MainLayout);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GroupForm";
             this.Load += new System.EventHandler(this.GroupForm_Load);
             this.MainLayout.ResumeLayout(false);
